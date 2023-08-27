@@ -19,7 +19,7 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter analyze
-      - run: dart format --dry-run --set-exit-if-changed .
+      - run: dart format --set-exit-if-changed .
       - run: flutter test --coverage
       - run: flutter test --machine > test-results.json
       - uses: dorny/test-reporter@v1.4.2
