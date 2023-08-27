@@ -5,7 +5,11 @@ class CurrencyDropdown extends StatelessWidget {
   final List<Map> currencies;
   final Function(String?) onChanged;
 
-  const CurrencyDropdown({super.key, required this.selectedCurrency, required this.currencies, required this.onChanged});
+  const CurrencyDropdown(
+      {super.key,
+      required this.selectedCurrency,
+      required this.currencies,
+      required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
