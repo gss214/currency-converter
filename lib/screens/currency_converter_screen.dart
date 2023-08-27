@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import '../services/api_service.dart';
+import '../widgtes/currency_dropdown.dart';
 
 class CurrencyConverterScreen extends StatefulWidget {
   const CurrencyConverterScreen({super.key});
 
   @override
-  _CurrencyConverterScreenState createState() =>
-      _CurrencyConverterScreenState();
+  CurrencyConverterScreenState createState() => CurrencyConverterScreenState();
 }
 
-class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
+class CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
   String _fromCurrency = 'USD';
   String _toCurrency = 'EUR';
   double _inputValue = 1.0;
@@ -35,15 +33,15 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
   ];
 
   void _convertCurrency() async {
-  try {
-    final rate = await ApiService.convertCurrency(_fromCurrency, _toCurrency);
-    setState(() {
-      _outputValue = _inputValue * rate;
-    });
-  } catch (e) {
-    print('Error: $e');
+    try {
+      final rate = await ApiService.convertCurrency(_fromCurrency, _toCurrency);
+      setState(() {
+        _outputValue = _inputValue * rate;
+      });
+    } catch (e) {
+      print('Error: $e');
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -56,71 +54,23 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: DropdownButton<String>(
-                value: _fromCurrency,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _fromCurrency = newValue!;
-                  });
-                },
-                items: _currencies.map<DropdownMenuItem<String>>((value) {
-                  return DropdownMenuItem<String>(
-                    value: value['name'],
-                    child: Row(
-                      children: [
-                        ClipOval(
-                          child: SizedBox.fromSize(
-                            size: const Size.fromRadius(15),
-                            child: Image.network(
-                              value['icon'],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
-                        ),
-                        Text(value['name']),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              ),
+            CurrencyDropdown(
+              selectedCurrency: _fromCurrency,
+              currencies: _currencies,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _fromCurrency = newValue!;
+                });
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: DropdownButton<String>(
-                value: _toCurrency,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _toCurrency = newValue!;
-                  });
-                },
-                items: _currencies.map<DropdownMenuItem<String>>((Map value) {
-                  return DropdownMenuItem<String>(
-                    value: value['name'],
-                    child: Row(
-                      children: [
-                        ClipOval(
-                          child: SizedBox.fromSize(
-                            size: const Size.fromRadius(15),
-                            child: Image.network(
-                              value['icon'],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
-                        ),
-                        Text(value['name']),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              ),
+            CurrencyDropdown(
+              selectedCurrency: _toCurrency,
+              currencies: _currencies,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _toCurrency = newValue!;
+                });
+              },
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
