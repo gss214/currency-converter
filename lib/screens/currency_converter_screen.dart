@@ -39,7 +39,8 @@ class CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
         _outputValue = _inputValue * rate;
       });
     } catch (e) {
-      print('Error: $e');
+      // ignore: avoid_print
+      print(e);
     }
   }
 
