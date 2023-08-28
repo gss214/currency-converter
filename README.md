@@ -4,10 +4,10 @@ The Currency Converter App is a simple Flutter application that allows users to 
 
 ## Features
 
-- Convert currency values from one currency to another.
-- Select the source and target currencies using dropdown menus.
-- Input the value you want to convert.
-- Display the converted value.
+- Effortlessly convert currency values across various currencies.
+- Select source and target currencies using intuitive dropdown menus.
+- Input the value you wish to convert with ease.
+- View the converted value based on the latest exchange rates.
 
 ## Screenshots
 
@@ -20,13 +20,13 @@ To run the Currency Converter App on your local machine, make sure you have Flut
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/your-username/currency_converter_app.git
+git clone https://github.com/gss214/currency-converter.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd currency_converter_app
+cd currency-converter
 ```
 
 3. Install dependecies:
